@@ -1,0 +1,54 @@
+body {
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+    padding: 10px;
+}
+
+.container {
+    background-color: #f4f4f4;
+    overflow-y: auto; /* Allows scrolling if content overflows */
+}
+
+.form-style {
+    height: auto;
+    resize: none;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 16px;
+}
+
+.dots {
+    display: inline-block;
+    position: relative;
+}
+.dots::after {
+    content: ".";
+    display: inline-block;
+    animation: ellipsis 0.8s steps(4, end) infinite;
+}
+
+@keyframes ellipsis {
+    0% {
+        content: ".";
+    }
+    33% {
+        content: "..";
+    }
+    66% {
+        content: "...";
+    }
+    100% {
+        content: ".";
+    }
+}
+
+.button-style
+{
+    width: 80px;
+    height: 30px;
+    border-width: 1px;
+    background-color: #ffffff;
+    font-size: 14px;
+}

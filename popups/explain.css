@@ -1,0 +1,36 @@
+body {
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+    padding: 10px;
+}
+
+.container {
+    background-color: #f4f4f4;
+    overflow-y: auto; /* Allows scrolling if content overflows */
+}
+
+.dots {
+    display: inline-block;
+    position: relative;
+}
+.dots::after {
+    content: ".";
+    display: inline-block;
+    animation: ellipsis 0.8s steps(4, end) infinite;
+}
+
+@keyframes ellipsis {
+    0% {
+        content: ".";
+    }
+    33% {
+        content: "..";
+    }
+    66% {
+        content: "...";
+    }
+    100% {
+        content: ".";
+    }
+}

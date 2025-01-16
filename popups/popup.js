@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     event.preventDefault();
 
                     const formData = new FormData(form);
-                    let input = formData.get('question');
+                    let input = String(formData.get('question'));
 
                     // Remove the textarea and button
                     const button = document.getElementById('button');
@@ -79,19 +79,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     redo.className = "button-style";
                     const redoParent = document.getElementById("redo-parent");
                     redoParent.appendChild(redo);
-
-                    // Remake the window and reset the local storage to activate the input handler again
-                    redo.addEventListener("click", () => {
-                        chrome.storage.local.set({ 'type': 'temp' });
-                        chrome.storage.local.set({ 'type': 'input' });
-
-                        chrome.windows.create({
-                            url: chrome.runtime.getURL("popups/inputpopup.html"),
-                            type: "popup",
-                            width: 600,
-                            height: 400
-                        });
-                    });
+                    
+                    resetInputHandler();
                 });
             }
         });
@@ -142,3 +131,17 @@ function closePopup() {
         }
     });
 }
+
+// Remakes the window and resets local storage to activate the input handler again
+function resetInputHandler() {
+    chrome.storage.local.set({ 'type': 'temp' });
+    chrome.storage.local.set({ 'type': 'input' });
+
+    chrome.windows.create({
+        url: chrome.runtime.getURL("popups/inputpopup.html"),
+        type: "popup",
+        width: 600,
+        height: 400
+    });
+}
+

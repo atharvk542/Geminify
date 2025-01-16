@@ -1,4 +1,4 @@
-var selectedText;
+let selectedText;
 
 // Creates both context menu options
 chrome.runtime.onInstalled.addListener(function () {

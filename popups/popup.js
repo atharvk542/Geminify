@@ -1,5 +1,6 @@
-import { GoogleGenerativeAI } from "../node_modules/@google/generative-ai/dist/index.mjs";
-import CONFIG from "../scripts/config.js";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+require('dotenv').config();
+const key = process.env.API_KEY;
 
 // Detects for all content being loaded on page
 document.addEventListener('DOMContentLoaded', function () {
@@ -7,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Detects the "selectedText" being updated in the local storage from events.js
     chrome.storage.local.get('selectedText', async function (data) {
         // Sets up functionality for Gemini AI
-        const genAI = new GoogleGenerativeAI(CONFIG.API_KEY);
+        const genAI = new GoogleGenerativeAI(key);
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
         // Detects the "type" being updated in the local storage from events.js
@@ -97,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Waits for the window to come out of focus (for the user to click off) and closes the window
         chrome.storage.local.get("autoclose", function (data) {
-            if(data.autoclose == true) {
+            if(data.autoclose) {
                 window.addEventListener('blur', function () {
                     setTimeout(closePopup, 15);
                 });
